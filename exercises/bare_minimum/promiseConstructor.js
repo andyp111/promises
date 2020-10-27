@@ -7,10 +7,16 @@
 var fs = require('fs');
 var request = require('request');
 var Promise = require('bluebird');
+var pluckFirst = require('./callbackReview.js');
 
 // This function should retrieve the first line of the file at `filePath`
 var pluckFirstLineFromFileAsync = function(filePath) {
   // TODO
+  var firstLine;
+  var promise = new Promise(pluckFirst.pluckFirstLineFromFileAsync(filePath, () => {}))
+    .then(firstLine)
+    .catch(error);
+  return promise;
 };
 
 // This function should retrieve the status code of a GET request to `url`
